@@ -15,9 +15,13 @@ def login():
 def root():
     return "The default, 'root' route"
 
-@app.route("/hello/<name>")
-def hello(name):
-    return "Hello %s" %name
+@app.route("/hello/")
+def hello():
+    name = request.args.get('name', '')
+    if name == '':
+        return "no param supplied"
+    else:
+        return "Hello %s" % name
 
 @app.route("/goodbye/")
 def goodbye():
