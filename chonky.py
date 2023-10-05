@@ -60,5 +60,9 @@ def account():
             
         return page
     
+@app.route("/add/<int:first>/<int:second>")
+def add(first, second):
+    return str(first+second)
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port= "8080", debug=True)
