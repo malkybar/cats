@@ -63,6 +63,29 @@ def account():
             </body><html>'''
             
         return page
+
+@app.route("/upload/", methods = ['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        f = request.files['datafile']
+        f.save('static/uploads/upload.png')
+        return "File Uploaded"
+    else:
+        page = '''
+        <html>
+        <body>
+        <form action="" method="post" name="form" enctype="multipart/form-data">
+        <input type="file" name="datafile"/>
+        <input type="submit" name="submit" id="submit"/>
+        </form>
+        </body>
+        </html>'''
+            
+        return page, 200
+
+app.route("/display/")
+def display():
+    return '<img src="'+url_for('static', filename='uploads/file.png')+'"/>'
     
 @app.route("/add/<int:first>/<int:second>")
 def add(first, second):
