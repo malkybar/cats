@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, abort, request
+from flask import Flask, redirect, url_for, abort, render_template, request
 app = Flask(__name__)
 
 @app.route("/private")
@@ -15,13 +15,10 @@ def login():
 def root():
     return "The default, 'root' route"
 
-@app.route("/hello/")
-def hello():
-    name = request.args.get('name', '')
-    if name == '':
-        return "no param supplied"
-    else:
-        return "Hello %s" % name
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
 
 @app.route("/goodbye/")
 def goodbye():
@@ -29,7 +26,10 @@ def goodbye():
     
 @app.route("/maxwell/")
 def maxwell():
-    return "Maxwell the chonky cat"
+    start = '<img src="'
+    url = url_for("static", filename="upload.png")
+    end = '">'
+    return  start+url+end, 200
 
 @app.errorhandler(404)
 def page_not_found(error):
