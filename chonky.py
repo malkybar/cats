@@ -90,6 +90,11 @@ def display():
 @app.route("/add/<int:first>/<int:second>")
 def add(first, second):
     return str(first+second)
+
+@app.route('/users/')
+def users():
+    names = ['maxwell', 'kenobi', 'beluga', 'neil', 'grevious']
+    return render_template('loops.html', names=names)
     
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port= "8080", debug=True)
